@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 export default class App extends React.Component {
   render() {
-  	//Change for Merge 
+
     return (
 
       <View style={styles.container}>
