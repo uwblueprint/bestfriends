@@ -1,6 +1,8 @@
 import React from 'react';
+import 'expo';
 import { StyleSheet, Text, View } from 'react-native';
 import TextInANest from './Components/Onboarding';
+import Onboarding from './Onboarding';
 
 export default class App extends React.Component {
   render() {
@@ -8,7 +10,7 @@ export default class App extends React.Component {
     return (
 
       <View style={styles.container}> 
-        <TextInANest> </TextInANest>
+        <Onboarding></Onboarding>
       </View>
     );
   }
