@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from './Button';
 import {
   StyleSheet,   // CSS-like styles
   Text,         // Renders text
@@ -11,7 +12,9 @@ export default class Screens extends Component {
       <View style={[styles.slide, { backgroundColor: '#C04DEE' }]}>
         <Text style={styles.header}>Base Screen</Text>
         <Text style={styles.text}>Look at this cool base screen I made</Text>
+        <Button text ="Test"/>
       </View>
+
     );
   }
 }
