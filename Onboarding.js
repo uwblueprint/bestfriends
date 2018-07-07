@@ -1,38 +1,20 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, StyleSheet } from 'react-native';
+import{
+	AppRegistry, // Registers the App
+	StatusBar, //Allows us the hide the status bar
+} from 'react native'
 
-export default class TextInANest extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            titleText: "OnBoarding",
-            bodyText: 'Information about Onboarding'
-        };
-    }
+import Screns from './Screens';
 
-    render() {
-        return (
-            <Text style={styles.baseText}>
-                <Text style={styles.titleText} onPress={this.onPressTitle}>
-                    {this.state.titleText}{'\n'}{'\n'}
-                </Text>
-                <Text numberOfLines={5}>
-                    {this.state.bodyText}
-                </Text>
-            </Text>
-        );
-    }
+export default class Onboarding extends Component {
+	compondnetDidMount(){
+		StatusBar.setHidden(true);
+	}
+	render(){
+		return(
+			<Screens/>
+			);
+	}
 }
 
-const styles = StyleSheet.create({
-    baseText: {
-        fontFamily: 'Cochin',
-    },
-    titleText: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-});
-
-// skip this line if using Create React Native App
-AppRegistry.registerComponent('Onboarding', () => TextInANest);
+AppRegistry.registerComponent('Onboarding', () => Onboarding);
