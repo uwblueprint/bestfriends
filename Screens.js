@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+
 import Button from './Button';
 import Swiper from './Swiper';
 import {
   StyleSheet,   // CSS-like styles
   Text,         // Renders text
-  View          // Container component
+  View,
+  Image          // Container component
 } from 'react-native';
 
 export default class Screens extends Component {
@@ -13,6 +15,7 @@ export default class Screens extends Component {
         <Swiper>
         {/* First screen */}
         <View style={[styles.slide, { backgroundColor: '#C04DEE' }]}>
+         
           <Text style={styles.header}>Screen1</Text>
           <Text style={styles.text}>Onboarding1</Text>
         </View>
