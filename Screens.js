@@ -14,20 +14,36 @@ export default class Screens extends Component {
     return (
         <Swiper>
         {/* First screen */}
-        <View style={[styles.slide, { backgroundColor: '#C04DEE' }]}>
-         
-          <Text style={styles.header}>Screen1</Text>
-          <Text style={styles.text}>Onboarding1</Text>
+        <View style={[styles.slide, { backgroundColor: '#4AAFEE' }]}>
+        <View  style={{flex:1}}>
+        <Image   style={styles.image} source={require('./onboarding1.jpg')}/>
+        <Text style = {styles.header}>Focus</Text>
+        <Text>Make sure that the pet is facing the camera and is in the center of the frame for the best results</Text>
+        </View>
         </View>
        {/* Second screen */}
-        <View style={[styles.slide, { backgroundColor: '#4AAFEE' }]}>
-          <Text style={styles.header}>Screen2</Text>
-          <Text style={styles.text}>Onboarding2</Text>
+       <View style={[styles.slide, { backgroundColor: '#4AAFEE' }]}>
+        <View  style={{flex:1}}>
+        <Image   style={styles.image} source={require('./onboarding2.png')}/>
+        <Text style = {styles.header}>Lighting</Text>
+        <Text>Find a location for the photoshoot where the sun is not facing you nor is too dark</Text>
+        </View>
         </View>
         {/* Third screen */}
-        <View style={[styles.slide, { backgroundColor: '#FC515B' }]}>
-          <Text style={styles.header}>Screen3</Text>
-          <Text style={styles.text}>Onboarding3</Text>
+        <View style={[styles.slide, { backgroundColor: '#4AAFEE' }]}>
+        <View  style={{flex:1}}>
+        <Image   style={styles.image} source={require('./onboarding3.png')}/>
+        <Text style = {styles.header}>Calm</Text>
+        <Text>Make sure the pet is relaxed and not agitated before the photoshoot happens</Text>
+        </View>
+        </View>
+        {/* Forth Screen */}
+        <View style={[styles.slide, { backgroundColor: '#4AAFEE' }]}>
+        <View  style={{flex:1}}>
+        <Image   style={styles.image} source={require('./onboarding4.png')}/>
+        <Text style = {styles.header}>Examples</Text>
+        <Text>Good pictures like these will make sure the pets get adopted</Text>
+        </View>
         </View>
       </Swiper>
 
@@ -41,6 +57,15 @@ const styles = StyleSheet.create({
     flex: 1,                    // Take up all screen
     justifyContent: 'center',   // Center vertically
     alignItems: 'center',       // Center horizontally
+  },
+  image:{
+  width: 250,
+  height: 250,
+  position: 'relative',
+  top: 0,
+  left: 0,
+  bottom: 0,
+  right: 0,
   },
   // Header styles
   header: {
