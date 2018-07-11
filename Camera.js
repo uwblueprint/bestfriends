@@ -44,7 +44,7 @@ export default class CameraExample extends React.Component {
                 }}>
                 <Text
                   style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                  {' '}Flippppp{' '}
+                  {' '}Flip{' '}
                 </Text>
               </TouchableOpacity>
             </View>
