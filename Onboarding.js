@@ -13,7 +13,7 @@ export default class Onboarding extends Component {
 	render(){
 		return(
 			<Screens/>
-			);
+		);
 	}
 }
 
