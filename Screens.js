@@ -12,38 +12,41 @@ import {
 export default class Screens extends Component {
   render() {
     return (
-        <Swiper>
+      <Swiper>
         {/* First screen */}
         <View style={[styles.slide, { backgroundColor: '#4AAFEE' }]}>
-        <View  style={{flex:1}}>
-        <Image   style={styles.image} source={require('./onboarding1.jpg')}/>
-        <Text style = {styles.header}>Focus</Text>
-        <Text>Make sure that the pet is facing the camera and is in the center of the frame for the best results</Text>
+          <View  style={{flex:1}}>
+            <Image   style={styles.image} source={require('./onboarding1.jpg')}/>
+            <Text style = {styles.header}>Focus</Text>
+            <Text>Make sure that the pet is facing the camera and is in the center of the frame for the best results</Text>
+          </View>
         </View>
+
+        {/* Second screen */}
+        <View style={[styles.slide, { backgroundColor: '#4AAFEE' }]}>
+          <View  style={{flex:1}}>
+            <Image   style={styles.image} source={require('./onboarding2.png')}/>
+            <Text style = {styles.header}>Lighting</Text>
+            <Text>Find a location for the photoshoot where the sun is not facing you nor is too dark</Text>
+          </View>
         </View>
-       {/* Second screen */}
-       <View style={[styles.slide, { backgroundColor: '#4AAFEE' }]}>
-        <View  style={{flex:1}}>
-        <Image   style={styles.image} source={require('./onboarding2.png')}/>
-        <Text style = {styles.header}>Lighting</Text>
-        <Text>Find a location for the photoshoot where the sun is not facing you nor is too dark</Text>
-        </View>
-        </View>
+
         {/* Third screen */}
         <View style={[styles.slide, { backgroundColor: '#4AAFEE' }]}>
-        <View  style={{flex:1}}>
-        <Image   style={styles.image} source={require('./onboarding3.png')}/>
-        <Text style = {styles.header}>Calm</Text>
-        <Text>Make sure the pet is relaxed and not agitated before the photoshoot happens</Text>
+          <View  style={{flex:1}}>
+            <Image   style={styles.image} source={require('./onboarding3.png')}/>
+            <Text style = {styles.header}>Calm</Text>
+            <Text>Make sure the pet is relaxed and not agitated before the photoshoot happens</Text>
+          </View>
         </View>
-        </View>
+
         {/* Forth Screen */}
         <View style={[styles.slide, { backgroundColor: '#4AAFEE' }]}>
-        <View  style={{flex:1}}>
-        <Image   style={styles.image} source={require('./onboarding4.png')}/>
-        <Text style = {styles.header}>Examples</Text>
-        <Text>Good pictures like these will make sure the pets get adopted</Text>
-        </View>
+          <View  style={{flex:1}}>
+            <Image   style={styles.image} source={require('./onboarding4.png')}/>
+            <Text style = {styles.header}>Examples</Text>
+            <Text>Good pictures like these will make sure the pets get adopted</Text>
+          </View>
         </View>
       </Swiper>
 
