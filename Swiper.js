@@ -165,6 +165,64 @@ export default class OnboardingScreens extends Component {
         });
       }
     }
+
+    swipeRight = () => {
+      // Ignore if already scrolling or if there is less than 2 slides
+      if (this.internals.isScrolling || this.state.total < 2) {
+        return;
+      }
+  
+      const state = this.state,
+        diff = this.state.index + 1,
+        x = diff * state.width,
+        y = 0;
+  
+      // Call scrollTo on scrollView component to perform the swipe
+      this.scrollView && this.scrollView.scrollTo({ x, y, animated: true });
+  
+      // Update internal scroll state
+      this.internals.isScrolling = true;
+  
+      // Trigger onScrollEnd manually on android
+      if (Platform.OS === 'android') {
+        setImmediate(() => {
+          this.onScrollEnd({
+            nativeEvent: {
+              position: diff
+            }
+          });
+        });
+      }
+    }
+
+    swipeLeft = () => {
+      // Ignore if already scrolling or if there is less than 2 slides
+      if (this.internals.isScrolling || this.state.total < 2 || this.state.index == 0) {
+        return;
+      }
+  
+      const state = this.state,
+        diff = this.state.index - 1,
+        x = diff * state.width,
+        y = 0;
+  
+      // Call scrollTo on scrollView component to perform the swipe
+      this.scrollView && this.scrollView.scrollTo({ x, y, animated: true });
+  
+      // Update internal scroll state
+      this.internals.isScrolling = true;
+  
+      // Trigger onScrollEnd manually on android
+      if (Platform.OS === 'android') {
+        setImmediate(() => {
+          this.onScrollEnd({
+            nativeEvent: {
+              position: diff
+            }
+          });
+        });
+      }
+    }
   
     /**
      * Render ScrollView component
@@ -231,10 +289,13 @@ export default class OnboardingScreens extends Component {
           {lastScreen
             // Show this button on the last screen
             // TODO: Add a handler that would send a user to your app after onboarding is complete
-            ? <Button text="Start Now" onPress={() => console.log('Send me to the app')} />
+            ? <Button text="Start Now" onPress={() => console.log('Send me to the app')}  style = {"color : 'black'"}/>
             // Or this one otherwise
-            : <Button text="Continue" onPress={() => this.swipe()} />
+            : <Button text="Next" onPress={() => this.swipeRight()} style ={"background : red"}/>
           }
+          
+            <Button text ="Back" onPress={() => this.swipeLeft()} />
+          
         </View>
       );
     }
@@ -264,7 +325,7 @@ export default class OnboardingScreens extends Component {
     },
     // Main container
     container: {
-      backgroundColor: 'transparent',
+      backgroundColor: '#FFFFFF',
       position: 'relative'
     },
     // Slide
@@ -286,9 +347,9 @@ export default class OnboardingScreens extends Component {
     // Pagination dot
     dot: {
       backgroundColor: 'rgba(0,0,0,.25)',
-      width: 8,
-      height: 8,
-      borderRadius: 4,
+      width: 12,
+      height: 12,
+      borderRadius: 6,
       marginLeft: 3,
       marginRight: 3,
       marginTop: 3,
@@ -296,11 +357,11 @@ export default class OnboardingScreens extends Component {
     },
     // Active dot
     activeDot: {
-      backgroundColor: '#FFFFFF',
+      backgroundColor: '#FFFF00',
     },
     // Button wrapper
     buttonWrapper: {
-      backgroundColor: 'transparent',
+     
       flexDirection: 'column',
       position: 'absolute',
       bottom: 0,
