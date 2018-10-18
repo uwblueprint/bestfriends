@@ -6,7 +6,8 @@ import {
  StyleSheet,   // CSS-like styles
  Text,         // Renders text
  View,
- Image          // Container component
+ Image,          // Container component
+ TouchableOpacity
 } from 'react-native';
 
 export default class Screens extends Component {
@@ -44,6 +45,13 @@ export default class Screens extends Component {
        <Text style = {styles.header}>EXAMPLES</Text>
        <Text style = {styles.text}>Good pictures like these will make sure the pets get adopted</Text>
        </View>
+       <TouchableOpacity
+          style={{
+            marginBottom: 20,
+          }}
+          onPress={this.props.openCamera}>
+          <Text>Camera</Text>
+        </TouchableOpacity>
        </View>
      </Swiper>
 
