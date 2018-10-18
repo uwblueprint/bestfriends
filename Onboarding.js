@@ -12,7 +12,7 @@ export default class Onboarding extends Component {
 	}
 	render(){
 		return(
-			<Screens/>
+			<Screens openCamera={this.props.openCamera}/>
 		);
 	}
 }
