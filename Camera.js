@@ -21,6 +21,7 @@ export default class CameraExample extends React.Component {
     console.log('snap')
     if (this.camera) {
       let photo = await this.camera.takePictureAsync({base64:true});
+      this.props.addPhoto(photo.uri);
       const form = {
         "requests": [
           {
@@ -42,8 +43,12 @@ export default class CameraExample extends React.Component {
       }).then(res => res.json())
       console.log(res)
       let saveResult = await CameraRoll.saveToCameraRoll(photo.uri, 'photo');
-      console.log(saveResult)
+    //  console.log(saveResult)
       // this.setState({ cameraRollUri: saveResult });
+      // let flask_res = await fetch('http://192.168.10.101:5000/opencv_analyze', {
+      //   method: 'POST',
+      // }).then(res => console.log(res))
+      // console.log(flask_res)
     }
   };
 
@@ -83,12 +88,12 @@ export default class CameraExample extends React.Component {
               </TouchableOpacity> */}
               <TouchableOpacity
                 style={{
-                  marginBottom: 20,
+                  marginBottom: 15,
                 }}
                 onPress={this.snap}>
                 <View
                   style={{ alignSelf: 'center',
-                  alignItems: 'center', width: 65, height: 65, borderRadius: 65/2, backgroundColor: 'white', borderStyle: 'solid', borderColor: '#ccc', borderWidth: 5, opacity: 0.8,}}>
+                  alignItems: 'center', width: 60, height: 60, borderRadius: 30, backgroundColor: '#CCC'}}>
                 </View>
               </TouchableOpacity>
             </View>

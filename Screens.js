@@ -49,7 +49,7 @@ export default class Screens extends Component {
           style={{
             marginBottom: 20,
           }}
-          onPress={this.props.openCamera}>
+          onPress={this.props.goToPhotos}>
           <Text>Camera</Text>
         </TouchableOpacity>
        </View>

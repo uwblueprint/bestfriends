@@ -1,21 +1,21 @@
 import React from 'react';
-import CameraExample from './Camera';
 import Onboarding from './Onboarding';
+import Photos from './Photos';
 
 export default class BestFriendsApp extends React.Component {
   state = {
     screen: 'onboarding',
   };
 
-  openCamera = () => {
-    this.setState({screen: 'camera'})
+  goToPhotos = () => {
+    this.setState({screen: 'photos'})
   }
 
   render() {
     return (
       this.state.screen == 'onboarding' ? 
-      <Onboarding openCamera={this.openCamera}></Onboarding> : 
-      <CameraExample></CameraExample>
+        <Onboarding goToPhotos={this.goToPhotos}></Onboarding> : 
+        <Photos></Photos>
     );
       
   }
