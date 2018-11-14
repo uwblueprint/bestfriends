@@ -93,7 +93,7 @@ export default class CameraExample extends React.Component {
                 onPress={this.snap}>
                 <View
                   style={{ alignSelf: 'center',
-                  alignItems: 'center', width: 60, height: 60, borderRadius: 30, backgroundColor: '#CCC'}}>
+                  alignItems: 'center', width: 60, height: 60, borderRadius: 30, backgroundColor: '#FA770B'}}>
                 </View>
               </TouchableOpacity>
             </View>
