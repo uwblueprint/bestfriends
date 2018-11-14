@@ -1,11 +1,13 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import CameraExample from './Camera'
 import CameraRollPicker from 'react-native-camera-roll-picker';
 
 export default class Photos extends React.Component {
   state = {
     camera: true,
+    cameraPhotos: [],
+    selectedPhotos: [],
   };
 
   styles = StyleSheet.create({
@@ -34,11 +36,16 @@ export default class Photos extends React.Component {
       textAlignVertical: "center",
       fontWeight: "bold",
       color: "#333333",
+    },
+    marker: {
+      position: 'absolute',
+      top: 5,
+      right: 5,
+      backgroundColor: 'transparent',
+      width: 25,
+      height: 25
     }
   })
-
-  cameraPhotos = [];
-  selectedPhotos = [];
 
   switchToCamera = () => {
     console.log('camera')
@@ -51,13 +58,11 @@ export default class Photos extends React.Component {
   }
 
   getCameraPhotos = (photo) => {
-    this.cameraPhotos.push(photo)
-    console.log(this.cameraPhotos)
+    this.setState({cameraPhotos: [...this.state.cameraPhotos, photo]});
   }
 
   getSelectedImages = (images) => {
-    selectedPhotos = images;
-    console.log(this.selectedPhotos)
+    this.setState({selectedPhotos: images.map((elem) => elem.uri)});
   }
 
   render() {
@@ -68,7 +73,7 @@ export default class Photos extends React.Component {
             <Text style={{ color: "#333333", fontWeight: "bold" }}>Tips</Text>
           </TouchableOpacity>
           <View style={{ flexDirection: "row" }}>
-            <Text style={{ color: "#333333", margin: 15 }}>#</Text>
+            <Text style={{ color: "#333333", margin: 15 }}>{this.state.cameraPhotos.length + this.state.selectedPhotos.length}</Text>
             <TouchableOpacity style={this.styles.navbarButton}>
               <Text style={{ color: "#FA770B", fontWeight: "bold" }}>Review</Text>
             </TouchableOpacity>
@@ -76,7 +81,10 @@ export default class Photos extends React.Component {
         </View>
         {this.state.camera ? 
           <CameraExample addPhoto={this.getCameraPhotos}></CameraExample> :
-          <CameraRollPicker callback={this.getSelectedImages} />}
+          <CameraRollPicker callback={this.getSelectedImages} selectedMarker={<Image
+            style={this.styles.marker}
+            source={require("./onboarding1.jpg")}
+          />}/>}
         <View style={{ flexDirection: "row", backgroundColor: "white" }}>
           <TouchableOpacity style={this.state.camera ? this.styles.buttonActive : this.styles.button} onPress={this.switchToCamera}>
             <Text style={this.styles.buttonText}>PHOTO</Text>
