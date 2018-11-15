@@ -17,7 +17,6 @@ export default class BestFriendsApp extends React.Component {
   componentDidMount() {
     AsyncStorage.getItem('alreadyLaunched').then(value => {
       if (value == null) {
-        AsyncStorage.setItem('alreadyLaunched', 'true');
         this.setState({ onboarded: false });
       } else {
         this.setState({ onboarded: true });
@@ -27,6 +26,7 @@ export default class BestFriendsApp extends React.Component {
 
   onOnboardingComplete() {
     this.setState({ onboarded: true });
+    AsyncStorage.setItem('alreadyLaunched', 'true');
   }
 
   render() {
