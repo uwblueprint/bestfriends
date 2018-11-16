@@ -1,6 +1,7 @@
 import React from 'react';
 import CameraExample from './Camera';
 import Onboarding from './Onboarding';
+import Validation from './Validation';
 
 export default class BestFriendsApp extends React.Component {
   state = {
@@ -13,9 +14,7 @@ export default class BestFriendsApp extends React.Component {
 
   render() {
     return (
-      this.state.screen == 'onboarding' ? 
-      <Onboarding openCamera={this.openCamera}></Onboarding> : 
-      <CameraExample></CameraExample>
+      <Validation></Validation>
     );
       
   }
