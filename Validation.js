@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, Image,StyleSheet } from 'react-native';
-
+import pass from './assets/pass.png';
+import fail from './assets/fail.png'
 
 
 export default class BestFriendsApp extends React.Component {
@@ -35,18 +36,18 @@ constructor(props){
   render() {
     console.log("This is Normal Text")
     console.log(this.state.goodLighting);
-    let goodLighting = (<Text>No</Text>);
-    let faceCentered = (<Text>No</Text>);
-    let focused = (<Text>No</Text>);
+    let goodLighting = (<Image  source = {fail}/>);
+    let faceCentered =(<Image  source = {fail}/>);
+    let focused =(<Image  source = {fail}/>);
 
     if(this.state.goodLighting){
-      goodLighting = (<Text>Yes</Text>)
+      goodLighting = (<Image source = {pass}/>)
     }
     if(this.state.faceCentered){
-      faceCentered = (<Text>Yes</Text>)
+      faceCentered = (<Image source = {pass}/>)
     }
     if(this.state.focus){
-      focused = (<Text>Yes</Text>)
+      focused = (<Image source = {pass}/>)
     }
     return (
       <View>
