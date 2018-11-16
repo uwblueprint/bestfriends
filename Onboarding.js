@@ -16,7 +16,7 @@ export default class Onboarding extends Component {
 	render(){
 		return(
 			<View style={styles.obContainer}>
-				<Image style={styles.obImage} source={require('./onboarding.png')}/>
+				<Image style={styles.obImage} source={require('./assets/onboarding.png')}/>
 				<Text style={styles.obText}>Get started to begin taking amazing photos for the pets!</Text>
 				<Button text="Get Started" onPress={this.props.onComplete}></Button>
 			</View>
