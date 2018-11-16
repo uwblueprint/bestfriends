@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image,StyleSheet } from 'react-native';
+import { Text, View, Image, StyleSheet, Button } from 'react-native';
 import pass from './assets/pass.png';
 import fail from './assets/fail.png'
 
@@ -16,20 +16,24 @@ constructor(props){
   componentDidMount(){
     this.validateImage();
   }
+  
+  saveImage = () => {
+    console.log("Saved the Image Boiiiii");
+  }
 
   validateImage = () => {
     let pic = this.props.pic
     var response = {
       fileName: "Name",
-      isClear: true,
-      isBright: true,
-      hasDog: true,
+      isClear: false,
+      isBright: false,
+      hasDog: false,
       breed: "Dog"
     }
     this.setState({
-      goodLighting: true,
-      faceCentered: true,
-      focus: true
+      goodLighting: false,
+      faceCentered: false,
+      focus: false
     });
   }
 
@@ -66,6 +70,7 @@ constructor(props){
         <Text>Focused</Text>
         {focused}
       </View>
+      <Button title ="Upload Image" onPress= {this.saveImage}></Button>
       </View>
       
     );
