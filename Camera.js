@@ -18,7 +18,6 @@ export default class CameraExample extends React.Component {
   }
 
   snap = async () => {
-    console.log('snap')
     if (this.camera) {
       let photo = await this.camera.takePictureAsync({});
       this.props.addPhoto(photo.uri);
@@ -68,24 +67,6 @@ export default class CameraExample extends React.Component {
                 justifyContent: 'center',
                 alignItems: 'flex-end',
               }}>
-              {/* <TouchableOpacity
-                style={{
-                  flex: 0.1,
-                  alignSelf: 'flex-end',
-                  alignItems: 'center',
-                }}
-                onPress={() => {
-                  this.setState({
-                    type: this.state.type === Camera.Constants.Type.back
-                      ? Camera.Constants.Type.front
-                      : Camera.Constants.Type.back,
-                  });
-                }}>
-                <Text
-                  style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                  {' '}Flip{' '}
-                </Text>
-              </TouchableOpacity> */}
               <TouchableOpacity
                 style={{
                   marginBottom: 15,
