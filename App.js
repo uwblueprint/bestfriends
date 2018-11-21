@@ -1,7 +1,7 @@
 import React from 'react';
 import CameraExample from './Camera';
 import Onboarding from './Onboarding';
-import Validation from './Validation';
+import ValidationScreen from './ValidationScreen';
 
 export default class BestFriendsApp extends React.Component {
   state = {
@@ -14,7 +14,7 @@ export default class BestFriendsApp extends React.Component {
 
   render() {
     return (
-      <Validation></Validation>
+      <ValidationScreen img ={require('./onboarding3.png')}></ValidationScreen>
     );
       
   }

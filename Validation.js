@@ -40,37 +40,35 @@ constructor(props){
   render() {
     console.log("This is Normal Text")
     console.log(this.state.goodLighting);
-    let goodLighting = (<Image  source = {fail}/>);
-    let faceCentered =(<Image  source = {fail}/>);
-    let focused =(<Image  source = {fail}/>);
+    let goodLighting = (<Image  style = {styles.icon} source = {fail}/>);
+    let faceCentered =(<Image  style = {styles.icon} source = {fail}/>);
+    let focused =(<Image style = {styles.icon} source = {fail}/>);
 
     if(this.state.goodLighting){
-      goodLighting = (<Image source = {pass}/>)
+      goodLighting = (<Image style = {styles.icon} source = {pass}/>)
     }
     if(this.state.faceCentered){
-      faceCentered = (<Image source = {pass}/>)
+      faceCentered = (<Image  source = {pass}/>)
     }
     if(this.state.focus){
-      focused = (<Image source = {pass}/>)
+      focused = (<Image  source = {pass}/>)
     }
     return (
-      <View>
-        <View>
-      <Text>GoodLighting</Text>
-      {goodLighting}
-      </View>
-
-      <View>
-        <Text>Face Centered</Text>
+      <View style = {styles.canvas}>
+         <View style={{flex: 1, flexDirection: 'row'}}>
+          {goodLighting}
+          <Text>GoodLighting</Text>
+          </View>  
+        <View style = {{flex: 1, flexDirection: 'row'}}>
         {faceCentered}
+        <Text>Face Centered</Text>
       </View>
-
-
-      <View>
-        <Text>Focused</Text>
+      <View style = {{flex:1, flexDirection: 'row'}}>
         {focused}
+        <Text>Focused</Text>
       </View>
-      <Button title ="Upload Image" onPress= {this.saveImage}></Button>
+      
+      
       </View>
       
     );
@@ -89,11 +87,16 @@ var styles = StyleSheet.create({
   },
   canvas: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
+  icon: {
+    height: 15,
+    width: 15
+  }
+
+  
 });
 
 
