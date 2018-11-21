@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, View, Image, StyleSheet, Button } from 'react-native';
+import { Text, View, Image, StyleSheet} from 'react-native';
 import pass from './assets/pass.png';
 import fail from './assets/fail.png'
+import Button from './Button';
 
 
 export default class BestFriendsApp extends React.Component {
@@ -68,7 +69,7 @@ constructor(props){
         <Text>Focused</Text>
       </View>
       
-      
+      <Button text = {"select"}></Button>
       </View>
       
     );
@@ -93,7 +94,9 @@ var styles = StyleSheet.create({
   },
   icon: {
     height: 15,
-    width: 15
+    width: 15,
+    right: 6,
+    top: 4
   }
 
   

@@ -16,7 +16,10 @@ export default class BestFriendsApp extends React.Component {
         <View>
         
         <Image source={this.props.img} ></Image>
+        <View>
         <Validation></Validation>
+        </View>
+        
         </View>
         
       );
