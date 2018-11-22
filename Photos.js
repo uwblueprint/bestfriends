@@ -25,6 +25,7 @@ export default class Photos extends React.Component {
   }
 
   getSelectedImages = (images) => {
+    console.log(this.state.selectedPhotos)
     this.setState({selectedPhotos: images.map((elem) => elem.uri)});
   }
 
@@ -37,7 +38,7 @@ export default class Photos extends React.Component {
           </TouchableOpacity>
           <View style={{ flexDirection: "row" }}>
             <Text style={{ color: "#333333", margin: 15 }}>{this.state.cameraPhotos.length + this.state.selectedPhotos.length}</Text>
-            <TouchableOpacity style={styles.navbarButton}>
+            <TouchableOpacity style={styles.navbarButton} onPress={this.props.validate.bind(this,this.state.cameraPhotos.concat(this.state.selectedPhotos))}>
               <Text style={{ color: "#FA770B", fontWeight: "bold" }}>Review</Text>
             </TouchableOpacity>
           </View>
@@ -46,7 +47,7 @@ export default class Photos extends React.Component {
           <CameraExample addPhoto={this.getCameraPhotos}></CameraExample> :
           <CameraRollPicker callback={this.getSelectedImages} selectedMarker={<Image
             style={styles.marker}
-            source={require("./onboarding1.jpg")}
+            source={require("./assets/selected.png")}
           />}/>}
         <View style={{ flexDirection: "row", backgroundColor: "white" }}>
           <TouchableOpacity style={this.state.camera ? styles.buttonActive : styles.button} onPress={this.switchToCamera}>

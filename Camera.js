@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, CameraRoll } from 'react-native';
+import { Text, View, TouchableOpacity, Image, CameraRoll } from 'react-native';
 import { Camera, Permissions } from 'expo';
 
 export default class CameraExample extends React.Component {
@@ -72,10 +72,10 @@ export default class CameraExample extends React.Component {
                   marginBottom: 15,
                 }}
                 onPress={this.snap}>
-                <View
-                  style={{ alignSelf: 'center',
-                  alignItems: 'center', width: 60, height: 60, borderRadius: 30, backgroundColor: '#FA770B'}}>
-                </View>
+                <Image
+                  style={{width: 60, height: 60}}
+                  source={require("./assets/camera.png")}
+                />
               </TouchableOpacity>
             </View>
           </Camera>
