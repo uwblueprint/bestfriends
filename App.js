@@ -1,7 +1,8 @@
 import React from 'react';
 import { AsyncStorage } from 'react-native';
-import CameraExample from './Camera';
 import Onboarding from './Onboarding';
+import Photos from './Photos';
+import Validation from './Validation'
 
 export default class BestFriendsApp extends React.Component {
 
@@ -12,6 +13,8 @@ export default class BestFriendsApp extends React.Component {
 
   state = {
     onboarded: null,
+    page: "photos",
+    photos: null,
   };
 
   componentDidMount() {
@@ -29,13 +32,22 @@ export default class BestFriendsApp extends React.Component {
     AsyncStorage.setItem('alreadyLaunched', 'true');
   }
 
+  validate = (photos) => {
+    // make request
+    this.setState({page: "validate", photos: photos});
+  }
+
   render() {
     if (this.state.onboarded === null) {
       return null;
     } else if (this.state.onboarded === false) {
       return <Onboarding onComplete={() => this.onOnboardingComplete()}></Onboarding>;
     } else {
-      return <CameraExample></CameraExample>;
+      if (this.state.page === "photos") {
+        return <Photos validate={this.validate}></Photos>;
+      } else if (this.state.page === "validate") {
+        return <Validation photos={this.state.photos}></Validation>
+      }
     }
   }
 }
