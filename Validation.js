@@ -9,51 +9,52 @@ export default class BestFriendsApp extends React.Component {
 constructor(props){
     super(props);
     this.state = {
-        goodLighting: false,
-        faceCentered: false,
-        focus: false
+        goodPhoto: false
       };
 }
-  componentDidMount(){
-    this.validateImage();
+  componentDidMount(){    
+    console.log(this.props.validationResponse)
+    this.isGoodPhoto();
   }
   
   saveImage = () => {
     console.log("Saved the Image Boiiiii");
   }
-
-  validateImage = () => {
-    let pic = this.props.pic
-    var response = {
-      fileName: "Name",
-      isClear: false,
-      isBright: false,
-      hasDog: false,
-      breed: "Dog"
+//comment
+  isGoodPhoto = () => {
+    if(this.props.validationResponse.goodLighting
+    && this.props.validationResponse.faceCentered
+    && this.props.validationResponse.focus){
+      this.setState({
+        goodPhoto: true
+      })
     }
-    this.setState({
-      goodLighting: false,
-      faceCentered: false,
-      focus: false
-    });
   }
 
   render() {
     console.log("This is Normal Text")
-    console.log(this.state.goodLighting);
+    console.log(this.props.validationResponse.goodLighting);
     let goodLighting = (<Image  style = {styles.icon} source = {fail}/>);
     let faceCentered =(<Image  style = {styles.icon} source = {fail}/>);
     let focused =(<Image style = {styles.icon} source = {fail}/>);
+    let button = (<Button text = {"select"}></Button>)
 
-    if(this.state.goodLighting){
+    if(this.props.validationResponse.isBright){
       goodLighting = (<Image style = {styles.icon} source = {pass}/>)
     }
-    if(this.state.faceCentered){
+
+    if(this.props.validationResponse.hasDog){
       faceCentered = (<Image  source = {pass}/>)
     }
-    if(this.state.focus){
+
+    if(this.props.validationResponse.isClear){
       focused = (<Image  source = {pass}/>)
     }
+
+    if(this.state.goodPhoto){
+      button = (<Button style = {styles.selectButton} text = {"select"}></Button>)
+    }
+
     return (
       <View style = {styles.canvas}>
          <View style={{flex: 1, flexDirection: 'row'}}>
@@ -68,8 +69,7 @@ constructor(props){
         {focused}
         <Text>Focused</Text>
       </View>
-      
-      <Button text = {"select"}></Button>
+      {button}
       </View>
       
     );
@@ -97,7 +97,11 @@ var styles = StyleSheet.create({
     width: 15,
     right: 6,
     top: 4
+  },
+  selectButton:{
+    backgroundColor:'#FFFFFF'
   }
+  
 
   
 });
