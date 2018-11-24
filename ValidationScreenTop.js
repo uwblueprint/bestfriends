@@ -10,7 +10,7 @@ export default class ValidationScreenTop extends React.Component {
 
   render() {
     return (
-    <View>
+    <View style = {styles.container}>
         <View>
             <Icon name = "cancel"/>
         </View>
@@ -38,6 +38,14 @@ const styles = StyleSheet.create({
       textStyle:{
         color:  '#FFFFFF'
 
-      }
+      },
+      container: {
+        flex: 1,
+        flexDirection : 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+        position: 'relative'
+      },
    
    });
