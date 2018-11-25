@@ -2,6 +2,7 @@ import React from 'react';
 import Validation from './Validation';
 import {Image, View, StyleSheet, Text} from 'react-native';
 import Button from './Button';
+import ValidationScreenTop from './ValidationScreenTop';
 export default class BestFriendsApp extends React.Component {
     constructor(props){
         super(props)
@@ -10,11 +11,11 @@ export default class BestFriendsApp extends React.Component {
           };
     }
     
-  //Comment tp cange
+
     render() {
       var valRes ={
           fileName: "Name",
-          isClear: true,
+          isClear: false,
           isBright: true,
           hasDog: true,
           breed: "Dog"
@@ -22,12 +23,13 @@ export default class BestFriendsApp extends React.Component {
       
       return (
         <View>
-        
-        <Image source={this.props.img} ></Image>
+        <View>
+        <ValidationScreenTop></ValidationScreenTop>
+        </View>
+         <Image source={this.props.img} ></Image>
         <View>
         <Validation validationResponse = {valRes}></Validation>
-        </View>
-       
+        </View> 
         </View>
         
       );

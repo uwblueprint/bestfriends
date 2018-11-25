@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
-        position: 'relative'
+        position: 'absolute'
       },
    
    });

@@ -22,9 +22,10 @@ constructor(props){
   }
 //comment
   isGoodPhoto = () => {
-    if(this.props.validationResponse.goodLighting
-    && this.props.validationResponse.faceCentered
-    && this.props.validationResponse.focus){
+    if(this.props.validationResponse.isClear
+    && this.props.validationResponse.isBright
+    && this.props.validationResponse.hasDog){
+      console.log("Made it in this if statement")
       this.setState({
         goodPhoto: true
       })
@@ -33,44 +34,43 @@ constructor(props){
 
   render() {
     console.log("This is Normal Text")
-    console.log(this.props.validationResponse.goodLighting);
+    
+    console.log("tHIS IS THE STATE", this.state.goodPhoto);
     let goodLighting = (<Image  style = {styles.icon} source = {fail}/>);
     let faceCentered =(<Image  style = {styles.icon} source = {fail}/>);
     let focused =(<Image style = {styles.icon} source = {fail}/>);
-    let button = (<Button text = {"select"}></Button>)
+    let button = (<Button goodPhoto = {this.state.goodPhoto} text = {"select"}></Button>)
 
     if(this.props.validationResponse.isBright){
       goodLighting = (<Image style = {styles.icon} source = {pass}/>)
     }
 
     if(this.props.validationResponse.hasDog){
-      faceCentered = (<Image  source = {pass}/>)
+      faceCentered = (<Image style = {styles.icon} source = {pass}/>)
     }
 
     if(this.props.validationResponse.isClear){
-      focused = (<Image  source = {pass}/>)
+      focused = (<Image style = {styles.icon} source = {pass}/>)
     }
 
-    if(this.state.goodPhoto){
-      button = (<Button style = {styles.selectButton} text = {"select"}></Button>)
-    }
+    
 
     return (
       <View style = {styles.canvas}>
-         <View style={{flex: 1, flexDirection: 'row'}}>
+        <View style={{flex: 1, flexDirection: 'row'}}>
           {goodLighting}
           <Text>GoodLighting</Text>
-          </View>  
+        </View>  
         <View style = {{flex: 1, flexDirection: 'row'}}>
-        {faceCentered}
-        <Text>Face Centered</Text>
-      </View>
-      <View style = {{flex:1, flexDirection: 'row'}}>
-        {focused}
-        <Text>Focused</Text>
-      </View>
-      {button}
-      </View>
+          {faceCentered}
+          <Text>Face Centered</Text>
+        </View>
+        <View style = {{flex:1, flexDirection: 'row'}}>
+          {focused}
+          <Text>Focused</Text>
+        </View>
+        {button}
+        </View>
       
     );
       
@@ -90,7 +90,7 @@ var styles = StyleSheet.create({
     position: 'absolute',
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    
   },
   icon: {
     height: 15,
