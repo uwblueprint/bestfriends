@@ -15,22 +15,32 @@ export default class BestFriendsApp extends React.Component {
     render() {
       var valRes ={
           fileName: "Name",
-          isClear: false,
+          isClear: true,
           isBright: true,
           hasDog: true,
           breed: "Dog"
         }
-      
+  
       return (
-        <View>
-        <View>
-        <ValidationScreenTop></ValidationScreenTop>
-        </View>
-         <Image source={this.props.img} ></Image>
-        <View>
+      <View style ={styles.container}>
+      <View style = {styles.header}>
+      <ValidationScreenTop></ValidationScreenTop>
+      </View>
+     
+      
+      <View style = {styles.imageContainer}>
+      <Image  style = {styles.image } source={this.props.img} ></Image>
+      </View>
+
+      <View style = {styles.imageContainer}>
         <Validation validationResponse = {valRes}></Validation>
-        </View> 
-        </View>
+      </View>
+      </View>
+     
+      
+      
+      
+        
         
       );
         
@@ -41,23 +51,28 @@ export default class BestFriendsApp extends React.Component {
   const styles = StyleSheet.create({
     // Slide styles
     
+    imageContainer:{
+      flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'relative'
+    },
     image:{
-      flex:1,
-      position: 'relative',
+      height: 300,
+      width: 500
+    },
+    container: {
+      flex: 1,
+      flexDirection: 'column'
     },
     // Header styles
     header: {
-      color: '#000000',
-      fontSize: 30,
-      fontWeight: 'bold',
-      marginVertical: 15,
-      textAlign: 'center',
+      height: 100,
+      
+      justifyContent: 'center',
+      alignItems: 'center'
     },
-    // Text below header
-    text: {
-      color: '#000000',
-      fontSize: 18,
-      marginHorizontal: 40,
-      textAlign: 'center',
-    },
+    
+    
    });

@@ -12,20 +12,25 @@ constructor(props){
         goodPhoto: false
       };
 }
+
   componentDidMount(){    
     console.log(this.props.validationResponse)
     this.isGoodPhoto();
   }
   
+ 
+  /*
+  ADD CODE HERE TO SAVE IMAGES TO BACK END 
+  */
   saveImage = () => {
     console.log("Saved the Image Boiiiii");
   }
-//comment
+
+  //If all 3 are true then the button will be changed to the appropriate colour scheme
   isGoodPhoto = () => {
     if(this.props.validationResponse.isClear
     && this.props.validationResponse.isBright
     && this.props.validationResponse.hasDog){
-      console.log("Made it in this if statement")
       this.setState({
         goodPhoto: true
       })
@@ -33,9 +38,7 @@ constructor(props){
   }
 
   render() {
-    console.log("This is Normal Text")
-    
-    console.log("tHIS IS THE STATE", this.state.goodPhoto);
+    //Logic for if a check mark or x should be displayed
     let goodLighting = (<Image  style = {styles.icon} source = {fail}/>);
     let faceCentered =(<Image  style = {styles.icon} source = {fail}/>);
     let focused =(<Image style = {styles.icon} source = {fail}/>);
@@ -53,24 +56,28 @@ constructor(props){
       focused = (<Image style = {styles.icon} source = {pass}/>)
     }
 
-    
-
     return (
       <View style = {styles.canvas}>
-        <View style={{flex: 1, flexDirection: 'row'}}>
-          {goodLighting}
-          <Text>GoodLighting</Text>
-        </View>  
-        <View style = {{flex: 1, flexDirection: 'row'}}>
-          {faceCentered}
-          <Text>Face Centered</Text>
+        <View style = {{flex:1,flexDirection:'column'}}>
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            {goodLighting}
+            <Text>GoodLighting</Text>
+          </View>  
+          <View style = {{flex: 1, flexDirection: 'row'}}>
+            {faceCentered}
+            <Text>Face Centered</Text>
+          </View>
+          <View style = {{flex:1, flexDirection: 'row'}}>
+            {focused}
+            <Text>Focused</Text>
+          </View>
         </View>
-        <View style = {{flex:1, flexDirection: 'row'}}>
-          {focused}
-          <Text>Focused</Text>
+        <View style = {{flex:1, flexDirection: 'column'}}>
+          {button}
         </View>
-        {button}
-        </View>
+        
+      </View>
+      
       
     );
       
@@ -79,17 +86,11 @@ constructor(props){
 }
 
 var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    position: 'relative'
-  },
   canvas: {
     position: 'absolute',
     flex: 1,
     justifyContent: 'center',
+    flexDirection: 'row'
     
   },
   icon: {
