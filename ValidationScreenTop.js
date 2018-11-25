@@ -20,19 +20,26 @@ export default class ValidationScreenTop extends React.Component {
   render() {
     return (
     <View style = {styles.container}>
-        <View>
+
+        <View style = {{flex:1, flexDirection: 'row',alignSelf: 'flex-start'}}> 
             <TouchableOpacity onPress = {this.navigateBack()}>
                 <Icon name = "cancel"/>
             </TouchableOpacity>
-            
         </View>
+
+        <View style = {{flex: 1, flexDirection: 'row', alignSelf: 'center', }}>
             <Text>Save Your Photos</Text>
-        <View style = {styles.circle}>
-            <Text style = {styles.textStyle} >4</Text>
         </View>
-        <TouchableOpacity onPress = {this.navigateFinish()}>
-            <Text style = {styles.finishText}>Finish</Text>
-        </TouchableOpacity>
+        
+        <View style = {{flex: 1, flexDirection: 'row', alignItems: 'flex-end', justifyContent : 'center', right: 3}}>
+            <View style = {styles.circle}>
+                <Text style = {styles.textStyle} >4</Text>
+            </View>
+            <TouchableOpacity onPress = {this.navigateFinish()}>
+                <Text style = {styles.finishText}>Finish</Text>
+            </TouchableOpacity>
+        </View>
+        
         
     </View>
       
@@ -52,7 +59,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
       },
       textStyle:{
-        color:  '#FFFFFF'
+        color:  '#FFFFFF',
+
 
       },
       finishText: {
@@ -61,10 +69,9 @@ const styles = StyleSheet.create({
       container: {
         flex: 1,
         flexDirection : 'row',
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-        
-        position: 'absolute'
+        position: 'absolute',
+        justifyContent: 'center',
+        alignSelf: 'center'
       },
    
    });
