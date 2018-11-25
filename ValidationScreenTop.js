@@ -31,7 +31,7 @@ export default class ValidationScreenTop extends React.Component {
             <Text>Save Your Photos</Text>
         </View>
         
-        <View style = {{flex: 1, flexDirection: 'row', alignItems: 'flex-end', justifyContent : 'center', right: 3}}>
+        <View style = {{flex: 1, flexDirection: 'row', alignItems: 'flex-end', justifyContent : 'center', left: 20}}>
             <View style = {styles.circle}>
                 <Text style = {styles.textStyle} >4</Text>
             </View>
