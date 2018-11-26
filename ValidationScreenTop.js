@@ -27,7 +27,7 @@ export default class ValidationScreenTop extends React.Component {
             </TouchableOpacity>
         </View>
 
-        <View style = {{flex: 1, flexDirection: 'row', alignSelf: 'center', }}>
+        <View style = {{flex: 1, flexDirection: 'row', alignSelf: 'center'}}>
             <Text>Save Your Photos</Text>
         </View>
         
@@ -57,11 +57,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffa500',
         alignItems: 'center',
         justifyContent: 'center',
+        right: 4
       },
       textStyle:{
         color:  '#FFFFFF',
-
-
+      },
+      savePhotos:{
+        fontSize: 15,
+        
       },
       finishText: {
           color: '#ffa500'

@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
   badText: {
     color:  '#ffa500',
     fontWeight: 'bold',
+    alignSelf: 'center'
   },
   //goodButton Container
   goodButton: {
@@ -56,5 +57,6 @@ const styles = StyleSheet.create({
   goodText: {
     color:  '#FFFFFF',
     fontWeight: 'bold',
+    alignSelf: 'center'
   },
 });

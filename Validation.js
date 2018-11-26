@@ -30,7 +30,7 @@ constructor(props){
   isGoodPhoto = () => {
     if(this.props.validationResponse.isClear
     && this.props.validationResponse.isBright
-    && this.props.validationResponse.hasDog){
+    && this.props.validationResponse.isCentered){
       this.setState({
         goodPhoto: true
       })
@@ -48,7 +48,7 @@ constructor(props){
       goodLighting = (<Image style = {styles.icon} source = {pass}/>)
     }
 
-    if(this.props.validationResponse.hasDog){
+    if(this.props.validationResponse.isCentered){
       faceCentered = (<Image style = {styles.icon} source = {pass}/>)
     }
 
