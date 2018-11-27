@@ -14,7 +14,7 @@ constructor(props){
 }
 
   componentDidMount(){    
-    console.log(this.props.validationResponse)
+    
     this.isGoodPhoto();
   }
   
