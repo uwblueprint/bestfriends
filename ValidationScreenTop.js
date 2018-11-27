@@ -23,7 +23,7 @@ export default class ValidationScreenTop extends React.Component {
 
         <View style = {{flex:1, flexDirection: 'row',alignSelf: 'flex-start'}}> 
             <TouchableOpacity onPress = {this.navigateBack()}>
-                <Icon name = "cancel"/>
+                <Image style = {styles.cancelIcon} source = {require('./assets/icon-close.png')}></Image>
             </TouchableOpacity>
         </View>
 
@@ -31,7 +31,7 @@ export default class ValidationScreenTop extends React.Component {
             <Text>Save Your Photos</Text>
         </View>
         
-        <View style = {{flex: 1, flexDirection: 'row', alignItems: 'flex-end', justifyContent : 'center', left: 20}}>
+        <View style = {{flex: 1, flexDirection: 'row', alignSelf: 'flex-end', alignItems: 'center', justifyContent : 'center', left: 20}}>
             <View style = {styles.circle}>
                 <Text style = {styles.textStyle} >4</Text>
             </View>
@@ -57,7 +57,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffa500',
         alignItems: 'center',
         justifyContent: 'center',
-        right: 4
+        right: 4,
+        alignSelf: 'center'
+      },
+      cancelIcon:{
+        height: 30,
+        width: 30
       },
       textStyle:{
         color:  '#FFFFFF',
@@ -67,7 +72,8 @@ const styles = StyleSheet.create({
         
       },
       finishText: {
-          color: '#ffa500'
+          color: '#ffa500',
+          alignSelf: 'center'
       },
       container: {
         flex: 1,
