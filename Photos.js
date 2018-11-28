@@ -52,7 +52,7 @@ export default class Photos extends React.Component {
           animationIn="slideInDown"
           animationOut="slideOutUp"
           backdropOpacity={0}
-          style={{marginLeft: 0, marginRight: 0, justifyContent: "flex-top", paddingTop: 55}}
+          style={{marginLeft: 0, marginRight: 0, justifyContent: "flex-top", paddingTop: 25}}
         >
           {this._renderModalContent()}
         </Modal>
