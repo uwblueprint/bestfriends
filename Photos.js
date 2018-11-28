@@ -2,12 +2,15 @@ import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import CameraExample from './Camera'
 import CameraRollPicker from 'react-native-camera-roll-picker';
+import Modal from 'react-native-modal';
+import TipsView from './TipsView';
 
 export default class Photos extends React.Component {
   state = {
     camera: true,
     cameraPhotos: [],
     selectedPhotos: [],
+    visibleModal: false,
   };
 
   switchToCamera = () => {
@@ -29,12 +32,33 @@ export default class Photos extends React.Component {
     this.setState({selectedPhotos: images.map((elem) => elem.uri)});
   }
 
+  _showTips = () => {
+    this.setState({ visibleModal: true });
+  };
+
+  _renderModalContent = () => (
+    <View style={styles.modalContent}>
+      <TipsView></TipsView>
+    </View>
+  );
+
   render() {
     return (
       <View style={{ flex: 1 }}>
+        <Modal 
+          isVisible={this.state.visibleModal}
+          onBackdropPress={() => this.setState({ visibleModal: false })}
+          hideModalContentWhileAnimating={true}
+          animationIn="slideInDown"
+          animationOut="slideOutUp"
+          backdropOpacity={0}
+          style={{marginLeft: 0, marginRight: 0, justifyContent: "flex-top", paddingTop: 55}}
+        >
+          {this._renderModalContent()}
+        </Modal>
         <View style={{ flexDirection: "row", justifyContent: "space-between", height: 50, marginLeft: 5, marginRight: 5 }}>
-          <TouchableOpacity style={styles.navbarButton}>
-            <Text style={{ color: "#333333", fontWeight: "bold" }}>Tips</Text>
+          <TouchableOpacity style={styles.navbarButton} onPress={this._showTips}>
+            <Text style={{ color: "#333333", fontWeight: "bold",}} >Tips</Text>
           </TouchableOpacity>
           <View style={{ flexDirection: "row" }}>
             <Text style={{ color: "#333333", margin: 15 }}>{this.state.cameraPhotos.length + this.state.selectedPhotos.length}</Text>
@@ -96,5 +120,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     width: 25,
     height: 25
-  }
+  },
+  modalContent: {
+    backgroundColor: "white",
+    padding: 22,
+    justifyContent: "center",
+    width: undefined,
+    borderRadius: 6,
+    borderColor: "rgba(0, 0, 0, 0.1)",
+  },
 })
