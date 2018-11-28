@@ -1,5 +1,5 @@
 import React from 'react';
-import Validation from './Validation';
+import Validation from './ValidationDisplay';
 import {Image, View, StyleSheet, Text, Dimensions} from 'react-native';
 import Button from './Button';
 import ValidationScreenTop from './ValidationScreenTop';
@@ -13,29 +13,24 @@ Validation Reponse form
           isCentered: true,
           breed: "Dog"
         }
-
 */
 export default class ValidationScreen extends React.Component {
     constructor(props){
         super(props)
     }
     
-
     render() {
-      
-      
-
         const dimensions = Dimensions.get('window');
         const imageHeight = Math.round(dimensions.height * 3/ 5);
         const imageWidth = dimensions.width;
         const headerHeight = Math.round(dimensions.height * .5/5);
         const validationHeight = Math.round(dimensions.height * 1/5)
+
       return (
       <View style ={styles.container}>
       <View style = {[styles.header, {height: headerHeight}]}>
       <ValidationScreenTop></ValidationScreenTop>
       </View>
-     
       
       <View style = {styles.imageContainer}>
       <Image  style = {{height: imageHeight, width: imageWidth} } source={this.props.img} ></Image>
@@ -45,12 +40,6 @@ export default class ValidationScreen extends React.Component {
         <Validation validationResponse = {this.props.valRes}></Validation>
       </View>
       </View>
-     
-      
-      
-      
-        
-        
       );
         
     }
