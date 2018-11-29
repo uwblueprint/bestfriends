@@ -8,7 +8,7 @@ export default class TipsView extends React.Component {
           <View style={{width: undefined}}>
             <FlatList
               style={{flexGrow: 0}}
-              scrollEnabled={'false'}
+              scrollEnabled={false}
               data={[
                 {key: 'Tip1', TipIcon: require('./assets/tip1.png') ,TipDescription: 'Find good lighting, not too bright or dark.'},
                 {key: 'Tip2', TipIcon: require('./assets/tip2.png') , TipDescription: 'Frame the pet\'s face in the center of the photo facing the camera.'},

@@ -52,7 +52,7 @@ export default class Photos extends React.Component {
           animationIn="slideInDown"
           animationOut="slideOutUp"
           backdropOpacity={0}
-          style={{marginLeft: 0, marginRight: 0, justifyContent: "flex-top", paddingTop: 55}}
+          style={{marginLeft: 0, marginRight: 0, flexDirection: "column", justifyContent: "flex-start"}}
         >
           {this._renderModalContent()}
         </Modal>
@@ -116,10 +116,10 @@ const styles = StyleSheet.create({
   marker: {
     position: 'absolute',
     top: 5,
-    right: 5,
+    left: 5,
     backgroundColor: 'transparent',
-    width: 25,
-    height: 25
+    width: 20,
+    height: 20
   },
   modalContent: {
     backgroundColor: "white",
