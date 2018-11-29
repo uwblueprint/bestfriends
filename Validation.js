@@ -4,8 +4,17 @@ import ValidationPhoto from './ValidationPhoto';
 import { MediaLibrary } from 'expo';
 
 export default class Validation extends React.Component {
-  state = {
-    photos: []
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      photos: [],
+    };
+    const isRecommended = photo => photo.isCentered && photo.isClear &&
+                                   photo.isBright   && photo.hasDog;
+    this.state.recommendedPhotos = props.photos.filter(isRecommended);
+    this.state.otherPhotos = props.photos.filter(photo => !isRecommended(photo));
+    console.log(this.state);
   }
 
   addPhoto = (photo) => {
@@ -48,13 +57,13 @@ export default class Validation extends React.Component {
         <ScrollView contentContainerStyle={{padding: 5}}>
           <Text style={styles.header}>The ones we like</Text>
           <View style={styles.gallery}>
-            {this.props.photos.map((elem, key) => 
-              <ValidationPhoto photo={elem} addPhoto={this.addPhoto}></ValidationPhoto>)}
+            {this.state.recommendedPhotos.map((elem, key) => 
+              <ValidationPhoto key={key} photo={elem} addPhoto={this.addPhoto}></ValidationPhoto>)}
           </View>
           <Text style={styles.header}>Other photos you took</Text>
           <View style={styles.gallery}>
-            {this.props.photos.map((elem, key) => 
-              <ValidationPhoto photo={elem} addPhoto={this.addPhoto}></ValidationPhoto>)}
+            {this.state.otherPhotos.map((elem, key) => 
+              <ValidationPhoto key={key} photo={elem} addPhoto={this.addPhoto}></ValidationPhoto>)}
           </View>
         </ScrollView>
 

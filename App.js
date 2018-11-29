@@ -2,7 +2,12 @@ import React from 'react';
 import { AsyncStorage } from 'react-native';
 import Onboarding from './Onboarding';
 import Photos from './Photos';
-import Validation from './Validation'
+import Validation from './Validation';
+
+/* This is a temporary backend endpoint that will simulate a real 
+ * request and response 
+ */
+const VALIDATION_API_URI = 'https://whip-visage.glitch.me/validate';
 
 export default class BestFriendsApp extends React.Component {
 
@@ -34,7 +39,28 @@ export default class BestFriendsApp extends React.Component {
 
   validate = (photos) => {
     // make request
-    this.setState({page: "validate", photos: photos});
+    let formData = new FormData();
+    for (let uri of photos) {
+      console.log({ uri });
+      formData.append('photo', { uri, name: uri, type: 'image/jpeg' });
+    }
+    fetch(VALIDATION_API_URI, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+      body: formData,
+     })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      // Perform success response.
+      this.setState({ page: "validate", photos: responseJson });
+      console.log(responseJson);
+    })
+    .catch((error) => {
+        console.log(error);
+    });
   }
 
   render() {

@@ -7,14 +7,14 @@ export default class ValidationPhoto extends React.Component {
   }
   
   select = () => {
-    this.props.addPhoto(this.props.photo)
+    this.props.addPhoto(this.props.photo.uri)
     this.setState({selected: !this.state.selected});
   }
 
   render() {
     return (
       <View>
-        <Image style={styles.image} source={{uri: this.props.photo}}/>
+        <Image style={styles.image} source={{uri: this.props.photo.uri}}/>
         <TouchableOpacity style={styles.view} onPress={this.select}>
           {this.state.selected ? <Image style={styles.selected} source={require("./assets/selected.png")}/> : null}
           <TouchableOpacity style={styles.expandButton}>
