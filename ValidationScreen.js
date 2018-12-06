@@ -18,6 +18,10 @@ export default class ValidationScreen extends React.Component {
     constructor(props){
         super(props)
     }
+
+    addPhoto = () => {
+      this.props.addPhoto(this.props.img)
+    }
     
     render() {
         const dimensions = Dimensions.get('window');
@@ -29,15 +33,15 @@ export default class ValidationScreen extends React.Component {
       return (
       <View style ={styles.container}>
       <View style = {[styles.header, {height: headerHeight}]}>
-      <ValidationScreenTop></ValidationScreenTop>
+      <ValidationScreenTop navigateBack={this.props.navigateBack} navigateFinish={this.props.navigateFinish} numPhotos={this.props.numPhotos}></ValidationScreenTop>
       </View>
       
       <View style = {styles.imageContainer}>
-      <Image  style = {{height: imageHeight, width: imageWidth} } source={this.props.img} ></Image>
+      <Image  style = {{height: imageHeight, width: imageWidth} } source={{uri: this.props.img}} ></Image>
       </View>
 
       <View style = {{height: validationHeight, alignItems: 'flex-end', top: 30}}>
-        <Validation validationResponse = {this.props.valRes}></Validation>
+        <Validation validationResponse = {this.props.valRes} addPhoto={this.addPhoto} selected={this.props.selected}></Validation>
       </View>
       </View>
       );
@@ -64,6 +68,7 @@ export default class ValidationScreen extends React.Component {
       flex: 1,
       flexDirection: 'column',
       margin: 15,
+      marginTop: 0
      
     },
     // Header styles

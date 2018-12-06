@@ -32,14 +32,14 @@ const styles = StyleSheet.create({
   badButton: {
     borderRadius: 50,        
     borderWidth: 2,           
-    borderColor: '#ffa500',   
-    paddingHorizontal: 50,    
+    borderColor: '#FA770B',   
+    paddingHorizontal: 10,    
     paddingVertical: 10,   
     backgroundColor: '#FFFFFF'   
   },
   // BadButton text
   badText: {
-    color:  '#ffa500',
+    color:  '#FA770B',
     fontWeight: 'bold',
     alignSelf: 'center'
   },
@@ -47,10 +47,10 @@ const styles = StyleSheet.create({
   goodButton: {
     borderRadius: 50,        
     borderWidth: 2,           
-    borderColor: '#ffa500',   
-    paddingHorizontal: 50,    
+    borderColor: '#FA770B',   
+    paddingHorizontal: 10,    
     paddingVertical: 10,
-    backgroundColor: '#ffa500'
+    backgroundColor: '#FA770B'
   },
 
   //goodButton Text

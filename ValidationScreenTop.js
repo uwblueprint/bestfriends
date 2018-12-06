@@ -5,25 +5,14 @@ export default class ValidationScreenTop extends React.Component {
   constructor(props){
       super(props)
   }
-  
-  //ADD CODE HERE FOR NAVIGATION LOGIC 
-  navigateBack = () =>{
-      console.log("This will take you back ")
-  }
-
-  //ADD CODE HERE FOR NAVIGATION LOGIC 
-  navigateFinish = () =>{
-      console.log("This will finish the thing")
-  }
-  
 
   render() {
     return (
     <View style = {styles.container}>
 
-        <View style = {{flex:1, flexDirection: 'row',alignSelf: 'flex-start'}}> 
-            <TouchableOpacity onPress = {this.navigateBack()}>
-                <Image style = {styles.cancelIcon} source = {require('./assets/icon-close.png')}></Image>
+        <View style = {{flex:1, flexDirection: 'row',alignSelf: 'center'}}> 
+            <TouchableOpacity onPress = {this.props.navigateBack}>
+                <Image style = {styles.cancelIcon} source = {require('./assets/close.png')}></Image>
             </TouchableOpacity>
         </View>
 
@@ -31,11 +20,11 @@ export default class ValidationScreenTop extends React.Component {
             <Text>Save Your Photos</Text>
         </View>
         
-        <View style = {{flex: 1, flexDirection: 'row', alignSelf: 'flex-end', alignItems: 'center', justifyContent : 'center', left: 20}}>
+        <View style = {{flex: 1, flexDirection: 'row', alignSelf: 'center', alignItems: 'center', justifyContent : 'center', left: 20}}>
             <View style = {styles.circle}>
-                <Text style = {styles.textStyle} >4</Text>
+                <Text style = {styles.textStyle} >{this.props.numPhotos}</Text>
             </View>
-            <TouchableOpacity onPress = {this.navigateFinish()}>
+            <TouchableOpacity style={{margin: 15}} onPress = {this.props.navigateFinish}>
                 <Text style = {styles.finishText}>Finish</Text>
             </TouchableOpacity>
         </View>
@@ -51,18 +40,18 @@ export default class ValidationScreenTop extends React.Component {
 const styles = StyleSheet.create({
     // Slide styles
     circle: {
-        height: 30,
-        width: 30,
-        borderRadius: 30,
-        backgroundColor: '#ffa500',
+        height: 25,
+        width: 25,
+        borderRadius: 25,
+        backgroundColor: '#FA770B',
+        zIndex: 0,
         alignItems: 'center',
         justifyContent: 'center',
-        right: 4,
         alignSelf: 'center'
       },
       cancelIcon:{
-        height: 30,
-        width: 30
+        height: 20,
+        width: 20
       },
       textStyle:{
         color:  '#FFFFFF',
@@ -72,15 +61,15 @@ const styles = StyleSheet.create({
         
       },
       finishText: {
-          color: '#ffa500',
-          alignSelf: 'center'
+          color: '#FA770B',
+          fontWeight: "bold"
       },
       container: {
-        flex: 1,
         flexDirection : 'row',
-        position: 'absolute',
         justifyContent: 'center',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        alignItems: 'center',
+        height: 50,
       },
    
    });

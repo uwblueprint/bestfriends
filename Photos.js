@@ -61,7 +61,9 @@ export default class Photos extends React.Component {
             <Text style={{ color: "#333333", fontWeight: "bold",}} >Tips</Text>
           </TouchableOpacity>
           <View style={{ flexDirection: "row" }}>
-            <Text style={{ color: "#333333", margin: 15 }}>{this.state.cameraPhotos.length + this.state.selectedPhotos.length}</Text>
+            <View style={styles.circle}>
+              <Text style={{ color: "white", }}>{this.state.cameraPhotos.length + this.state.selectedPhotos.length}</Text>
+            </View>
             <TouchableOpacity style={styles.navbarButton} onPress={this.props.validate.bind(this,this.state.cameraPhotos.concat(this.state.selectedPhotos))}>
               <Text style={{ color: "#FA770B", fontWeight: "bold" }}>Review</Text>
             </TouchableOpacity>
@@ -89,6 +91,7 @@ export default class Photos extends React.Component {
 const styles = StyleSheet.create({
   navbarButton: {
     margin: 15,
+    marginLeft: 10,
   },
   button: {
     flex: 1,
@@ -128,5 +131,15 @@ const styles = StyleSheet.create({
     width: undefined,
     borderRadius: 6,
     borderColor: "rgba(0, 0, 0, 0.1)",
+  },
+  circle: {
+    height: 25,
+    width: 25,
+    borderRadius: 25,
+    backgroundColor: '#FA770B',
+    zIndex: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center'
   },
 })

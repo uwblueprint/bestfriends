@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, ScrollView, StyleSheet, Image, ImageBackg
 
 export default class ValidationPhoto extends React.Component {
   state = {
-    selected: false
+    selected: this.props.selected
   }
   
   select = () => {
@@ -17,7 +17,7 @@ export default class ValidationPhoto extends React.Component {
         <Image style={styles.image} source={{uri: this.props.photo.uri}}/>
         <TouchableOpacity style={styles.view} onPress={this.select}>
           {this.state.selected ? <Image style={styles.selected} source={require("./assets/selected.png")}/> : null}
-          <TouchableOpacity style={styles.expandButton}>
+          <TouchableOpacity style={styles.expandButton} onPress={this.props.expand.bind(this, this.props.photo)}>
             <Image style={styles.expand} source={require("./assets/expand.png")}/>
           </TouchableOpacity>
         </TouchableOpacity>

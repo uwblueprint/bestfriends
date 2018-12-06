@@ -37,6 +37,10 @@ export default class BestFriendsApp extends React.Component {
     AsyncStorage.setItem('alreadyLaunched', 'true');
   }
 
+  back = () => {
+    this.setState({page: "photos"})
+  }
+
   validate = (photos) => {
     // make request
     let formData = new FormData();
@@ -72,7 +76,7 @@ export default class BestFriendsApp extends React.Component {
       if (this.state.page === "photos") {
         return <Photos validate={this.validate}></Photos>;
       } else if (this.state.page === "validate") {
-        return <Validation photos={this.state.photos}></Validation>
+        return <Validation photos={this.state.photos} back={this.back}></Validation>
       }
     }
   }

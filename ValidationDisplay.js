@@ -9,7 +9,8 @@ export default class BestFriendsApp extends React.Component {
 constructor(props){
     super(props);
     this.state = {
-        goodPhoto: false
+        goodPhoto: false,
+        selected: this.props.selected,
       };
 }
 
@@ -22,8 +23,15 @@ constructor(props){
   /*
   ADD CODE HERE TO SAVE IMAGES TO BACK END 
   */
-  saveImage = () => {
+  selectImage = () => {
     console.log("Saved the Image Boiiiii");
+    this.props.addPhoto()
+    this.setState({selected: true})
+  }
+
+  unselectImage = () => {
+    this.props.addPhoto()
+    this.setState({selected: false})
   }
 
   //If all 3 are true then the button will be changed to the appropriate colour scheme
@@ -42,7 +50,9 @@ constructor(props){
     let goodLighting = (<Image  style = {styles.icon} source = {fail}/>);
     let faceCentered =(<Image  style = {styles.icon} source = {fail}/>);
     let focused =(<Image style = {styles.icon} source = {fail}/>);
-    let button = (<Button goodPhoto = {this.state.goodPhoto} text = {"select"}></Button>)
+    let button = this.state.selected ? 
+      (<Button goodPhoto = {true} text = {"selected"} onPress={this.unselectImage}></Button>):
+      (<Button goodPhoto = {false} text = {"select"} onPress={this.selectImage}></Button>);
 
     if(this.props.validationResponse.isBright){
       goodLighting = (<Image style = {styles.icon} source = {pass}/>)
@@ -101,6 +111,10 @@ var styles = StyleSheet.create({
   },
   selectButton:{
     backgroundColor:'#FFFFFF'
+  },
+  selectedButton:{
+    color: 'white',
+    backgroundColor: '#FA770B'
   }
   
 
