@@ -48,17 +48,16 @@ export default class Photos extends React.Component {
         <Modal 
           isVisible={this.state.visibleModal}
           onBackdropPress={() => this.setState({ visibleModal: false })}
-          hideModalContentWhileAnimating={true}
           animationIn="slideInDown"
           animationOut="slideOutUp"
           backdropOpacity={0}
-          style={{marginLeft: 0, marginRight: 0, justifyContent: "flex-start", paddingTop: 0}}
+          style={{marginLeft: 0, marginRight: 0, justifyContent: "flex-start", paddingTop: 25}}
         >
           {this._renderModalContent()}
         </Modal>
         <View style={{ flexDirection: "row", justifyContent: "space-between", height: 50, marginLeft: 5, marginRight: 5 }}>
           <TouchableOpacity style={styles.navbarButton} onPress={this._showTips}>
-            <Text style={{ color: "#333333", fontWeight: "bold",}} >Tips</Text>
+            <Text style={{ color: "#333333", fontWeight: "bold",}} >{this.state.visibleModal? 'X' : 'Tips'}</Text>
           </TouchableOpacity>
           <View style={{ flexDirection: "row" }}>
             <View style={styles.circle}>
