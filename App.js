@@ -4,8 +4,8 @@ import Onboarding from './Onboarding';
 import Photos from './Photos';
 import Validation from './Validation';
 
-/* This is a temporary backend endpoint that will simulate a real 
- * request and response 
+/* This is a temporary backend endpoint that will simulate a real
+ * request and response
  */
 const VALIDATION_API_URI = 'https://whip-visage.glitch.me/validate';
 
@@ -42,13 +42,17 @@ export default class BestFriendsApp extends React.Component {
   }
 
   validate = (photos) => {
+    if (photos.length == 0) {
+      // Error banner here
+      return Promise.resolve()
+    }
     // make request
     let formData = new FormData();
     for (let uri of photos) {
       console.log({ uri });
       formData.append('photo', { uri, name: uri, type: 'image/jpeg' });
     }
-    fetch(VALIDATION_API_URI, {
+    return fetch(VALIDATION_API_URI, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

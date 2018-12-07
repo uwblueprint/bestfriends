@@ -3,14 +3,17 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import CameraExample from './Camera'
 import CameraRollPicker from 'react-native-camera-roll-picker';
 import Modal from 'react-native-modal';
+import Loader from './Loader';
 import TipsView from './TipsView';
 
 export default class Photos extends React.Component {
+  completedReview = false
   state = {
     camera: true,
     cameraPhotos: [],
     selectedPhotos: [],
     visibleModal: false,
+    isReviewing: false
   };
 
   switchToCamera = () => {
@@ -32,6 +35,20 @@ export default class Photos extends React.Component {
     this.setState({selectedPhotos: images.map((elem) => elem.uri)});
   }
 
+  onPressReview = () => {
+    const selectedPhotos = this.state.cameraPhotos.concat(this.state.selectedPhotos)
+    this.setState({ isReviewing: true })
+    this.props.validate(selectedPhotos)
+        .then(() => {
+          if (!this.completedReview) {
+            this.setState({ isReviewing: false })
+          }
+        }).catch(() => {
+          this.setState({ isReviewing: false })
+          console.log("Request errored, unable to review photos")
+        })
+  }
+
   _showTips = () => {
     this.setState({ visibleModal: true });
   };
@@ -42,29 +59,33 @@ export default class Photos extends React.Component {
     </View>
   );
 
+  componentWillUnmount() {
+    this.completedReview = true;
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
+        <Loader loading={this.state.isReviewing} text="Reviewing Photos..." />
         <Modal 
           isVisible={this.state.visibleModal}
           onBackdropPress={() => this.setState({ visibleModal: false })}
-          hideModalContentWhileAnimating={true}
           animationIn="slideInDown"
           animationOut="slideOutUp"
           backdropOpacity={0}
-          style={{marginLeft: 0, marginRight: 0, justifyContent: "flex-start", paddingTop: 0}}
+          style={{marginLeft: 0, marginRight: 0, justifyContent: "flex-start", paddingTop: 25}}
         >
           {this._renderModalContent()}
         </Modal>
         <View style={{ flexDirection: "row", justifyContent: "space-between", height: 50, marginLeft: 5, marginRight: 5 }}>
           <TouchableOpacity style={styles.navbarButton} onPress={this._showTips}>
-            <Text style={{ color: "#333333", fontWeight: "bold",}} >Tips</Text>
+            <Text style={{ color: "#333333", fontWeight: "bold",}} >{this.state.visibleModal? 'X' : 'Tips'}</Text>
           </TouchableOpacity>
           <View style={{ flexDirection: "row" }}>
             <View style={styles.circle}>
               <Text style={{ color: "white", }}>{this.state.cameraPhotos.length + this.state.selectedPhotos.length}</Text>
             </View>
-            <TouchableOpacity style={styles.navbarButton} onPress={this.props.validate.bind(this,this.state.cameraPhotos.concat(this.state.selectedPhotos))}>
+            <TouchableOpacity style={styles.navbarButton} onPress={this.onPressReview}>
               <Text style={{ color: "#FA770B", fontWeight: "bold" }}>Review</Text>
             </TouchableOpacity>
           </View>
