@@ -41,9 +41,11 @@ export default class Validation extends React.Component {
       if (elem.substring(0, 7) !== 'content') saveablePhotos.push(elem)
     })
     console.log(saveablePhotos)
+    let unsaveablePhotos = this.state.photos.length - saveablePhotos.length;
+    const message = unsaveablePhotos ? unsaveablePhotos + " photos are already in your camera roll." : "";
     Alert.alert(
       "You've selected " + this.state.photos.length + " photos to save",
-      this.state.photos.length - saveablePhotos.length + " photos are already in your camera roll. The photos you didn't select will be discarded.",
+      message + "The photos you didn't select will be discarded.",
       [
         {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
         {text: 'OK', onPress: async () => await this.savePhotos(saveablePhotos)},
