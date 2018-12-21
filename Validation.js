@@ -2,9 +2,9 @@ import React from 'react';
 import { Text, View, TouchableOpacity, ScrollView, StyleSheet, Image, Dimensions, Alert } from 'react-native';
 import ValidationPhoto from './ValidationPhoto';
 import ValidationScreen from './ValidationScreen';
-import Confirm from './ConfirmPhotosModal'
 import { MediaLibrary } from 'expo';
 
+// main container for validation page
 export default class Validation extends React.Component {
   constructor(props) {
     super(props);
@@ -12,15 +12,14 @@ export default class Validation extends React.Component {
     this.state = {
       photos: [],
       expand: null,
-      confirm: false,
     };
     const isRecommended = photo => photo.isCentered && photo.isClear &&
                                    photo.isBright   && photo.hasDog;
     this.state.recommendedPhotos = props.photos.filter(isRecommended);
     this.state.otherPhotos = props.photos.filter(photo => !isRecommended(photo));
-    console.log(this.state);
   }
 
+  // add photo to photos array if not already in array
   addPhoto = (photo) => {
     if (this.state.photos.includes(photo)) {
       this.setState({photos: this.state.photos.filter((elem) => elem != photo)});
@@ -29,18 +28,14 @@ export default class Validation extends React.Component {
     }
   }
 
-  confirm = () => {
-    this.setState({ confirm: !this.state.confirm })
-  }
-
+  // confirm and save photos
   finish = () => {
     let saveablePhotos = [];
-    console.log(this.state.photos)
     this.state.photos.map((elem) => {
-      console.log(elem.substring(0,7))
+      // unable to save photos that start with 'content' - not entirely sure why,
+      // but these are only the photos that are chosen from the camera roll
       if (elem.substring(0, 7) !== 'content') saveablePhotos.push(elem)
     })
-    console.log(saveablePhotos)
     let unsaveablePhotos = this.state.photos.length - saveablePhotos.length;
     const message = unsaveablePhotos ? unsaveablePhotos + " photos are already in your camera roll." : "";
     Alert.alert(
@@ -55,7 +50,6 @@ export default class Validation extends React.Component {
   }
 
   savePhotos = async (saveablePhotos) => {
-    console.log('savephoto')
     let promises = saveablePhotos.map((elem => {
       return MediaLibrary.createAssetAsync(elem).then((asset) => {
         MediaLibrary.createAlbumAsync('Best Friends', asset)
@@ -63,14 +57,11 @@ export default class Validation extends React.Component {
           console.log('Album created!');
         })
         .catch(error => {
-          console.log(  'err', error);
+          console.log('err', error);
         });
       })
       }))
     Promise.all(promises)
-    // const asset = await MediaLibrary.createAssetAsync(this.photos[0]);
-    // MediaLibrary.createAlbumAsync('Expo', asset)
-    // MediaLibrary.addAssetsToAlbumAsync(this.photos, 'Expo').then(() => console.log("saved"))
   }
 
   expand = (photo) => {
@@ -83,17 +74,17 @@ export default class Validation extends React.Component {
 
   render() {
     return (
-      this.state.expand ? <ValidationScreen expand={this.expand} img={this.state.expand.uri} valRes={this.state.expand} navigateBack={this.navigateBack} navigateFinish={this.finish} numPhotos={this.state.photos.length} addPhoto={this.addPhoto} selected={this.state.photos.includes(this.state.expand.uri)}></ValidationScreen> :
+      this.state.expand ? 
+      // view photo as full screen
+      <ValidationScreen expand={this.expand} img={this.state.expand.uri} valRes={this.state.expand} navigateBack={this.navigateBack} navigateFinish={this.finish} numPhotos={this.state.photos.length} addPhoto={this.addPhoto} selected={this.state.photos.includes(this.state.expand.uri)}></ValidationScreen> :
+      // view all photos
       <View style = {{flex: 1}}>
-        {console.log(this.props.photos)}
+        {/* navbar */}
         <View style={{ flexDirection: "row", justifyContent: 'space-between', alignContent: 'center', height: 50, marginLeft: 5, marginRight: 5 }}>
           <TouchableOpacity style={styles.backButton} onPress={this.props.back}>
             <Image style={styles.backIcon} source = {require('./assets/back.png')}></Image>
           </TouchableOpacity>
           <Text style = {{alignSelf: 'center', fontWeight: 'bold', justifyContent: 'center' }}> Save Your Photos</Text>
-          {/* <View style = {{flex: 1, flexDirection: 'row', alignSelf: 'center', backgroundColor: 'red'}}>
-            
-          </View> */}
           <View style={{ flexDirection: "row" }}>
             <View style={styles.circle}>
               <Text style={{ color: "white" }}>{this.state.photos.length}</Text>
@@ -103,6 +94,7 @@ export default class Validation extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
+        {/* all photos */}
         <ScrollView contentContainerStyle={{padding: 5}}>
           <Text style={styles.header}>The ones we like</Text>
           <View style={styles.gallery}>
@@ -114,7 +106,6 @@ export default class Validation extends React.Component {
             {this.state.otherPhotos.map((elem, key) => 
               <ValidationPhoto key={key} photo={elem} addPhoto={this.addPhoto} expand={this.expand} selected={this.state.photos.includes(elem.uri)}></ValidationPhoto>)}
           </View>
-          {/* <Confirm></Confirm> */}
         </ScrollView>
 
       </View>

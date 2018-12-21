@@ -1,14 +1,15 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, ScrollView, StyleSheet, Image, ImageBackground, Dimensions } from 'react-native';
 
+// component for individual photo on validation page
 export default class ValidationPhoto extends React.Component {
   state = {
     selected: this.props.selected
   }
   
   select = () => {
-    this.props.addPhoto(this.props.photo.uri)
-    this.setState({selected: !this.state.selected});
+    this.props.addPhoto(this.props.photo.uri) // add photo to array in parent component
+    this.setState({selected: !this.state.selected}); // show selected marker
   }
 
   render() {

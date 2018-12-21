@@ -9,7 +9,7 @@ import TipsView from './TipsView';
 export default class Photos extends React.Component {
   completedReview = false
   state = {
-    camera: true,
+    camera: true, // default is camera
     cameraPhotos: [],
     selectedPhotos: [],
     visibleModal: false,
@@ -17,12 +17,10 @@ export default class Photos extends React.Component {
   };
 
   switchToCamera = () => {
-    console.log('camera')
     this.state.camera ? null : this.setState({camera: true})
   }
 
   switchToCameraRoll = () => {
-    console.log('cameraRoll')
     this.state.camera ? this.setState({camera: false}) : null
   }
 
@@ -31,7 +29,6 @@ export default class Photos extends React.Component {
   }
 
   getSelectedImages = (images) => {
-    console.log(this.state.selectedPhotos)
     this.setState({selectedPhotos: images.map((elem) => elem.uri)});
   }
 
@@ -77,6 +74,7 @@ export default class Photos extends React.Component {
         >
           {this._renderModalContent()}
         </Modal>
+        {/* nav bar */}
         <View style={{ flexDirection: "row", justifyContent: "space-between", height: 50, marginLeft: 5, marginRight: 5 }}>
           <TouchableOpacity style={styles.navbarButton} onPress={this._showTips}>
             <Text style={{ color: "#333333", fontWeight: "bold",}} >{this.state.visibleModal? 'X' : 'Tips'}</Text>
@@ -90,12 +88,14 @@ export default class Photos extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
+        {/* displays camera or gallery */}
         {this.state.camera ? 
           <CameraExample addPhoto={this.getCameraPhotos}></CameraExample> :
           <CameraRollPicker callback={this.getSelectedImages} selectedMarker={<Image
             style={styles.marker}
             source={require("./assets/selected.png")}
           />}/>}
+        {/* buttons to select camera or gallery */}
         <View style={{ flexDirection: "row", backgroundColor: "white" }}>
           <TouchableOpacity style={this.state.camera ? styles.buttonActive : styles.button} onPress={this.switchToCamera}>
             <Text style={styles.buttonText}>CAMERA</Text>
