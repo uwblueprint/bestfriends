@@ -7,7 +7,7 @@ import Validation from './Validation';
 /* This is a temporary backend endpoint that will simulate a real 
  * request and response 
  */
-const VALIDATION_API_URI = 'https://whip-visage.glitch.me/validate';
+const VALIDATION_API_URI = 'http://ec2-54-164-18-2.compute-1.amazonaws.com/verify';
 
 export default class BestFriendsApp extends React.Component {
 
@@ -42,7 +42,7 @@ export default class BestFriendsApp extends React.Component {
     let formData = new FormData();
     for (let uri of photos) {
       console.log({ uri });
-      formData.append('photo', { uri, name: uri, type: 'image/jpeg' });
+      formData.append(uri, { uri, name: uri, type: 'image/jpeg' });
     }
     fetch(VALIDATION_API_URI, {
       method: 'POST',
