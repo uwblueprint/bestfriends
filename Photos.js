@@ -3,23 +3,24 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import CameraExample from './Camera'
 import CameraRollPicker from 'react-native-camera-roll-picker';
 import Modal from 'react-native-modal';
+import Loader from './Loader';
 import TipsView from './TipsView';
 
 export default class Photos extends React.Component {
+  completedReview = false
   state = {
-    camera: true,
+    camera: true, // default is camera
     cameraPhotos: [],
     selectedPhotos: [],
     visibleModal: false,
+    isReviewing: false
   };
 
   switchToCamera = () => {
-    console.log('camera')
     this.state.camera ? null : this.setState({camera: true})
   }
 
   switchToCameraRoll = () => {
-    console.log('cameraRoll')
     this.state.camera ? this.setState({camera: false}) : null
   }
 
@@ -28,8 +29,21 @@ export default class Photos extends React.Component {
   }
 
   getSelectedImages = (images) => {
-    console.log(this.state.selectedPhotos)
     this.setState({selectedPhotos: images.map((elem) => elem.uri)});
+  }
+
+  onPressReview = () => {
+    const selectedPhotos = this.state.cameraPhotos.concat(this.state.selectedPhotos)
+    this.setState({ isReviewing: true })
+    this.props.validate(selectedPhotos)
+        .then(() => {
+          if (!this.completedReview) {
+            this.setState({ isReviewing: false })
+          }
+        }).catch(() => {
+          this.setState({ isReviewing: false })
+          console.log("Request errored, unable to review photos")
+        })
   }
 
   _showTips = () => {
@@ -42,37 +56,46 @@ export default class Photos extends React.Component {
     </View>
   );
 
+  componentWillUnmount() {
+    this.completedReview = true;
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
+        <Loader loading={this.state.isReviewing} text="Reviewing Photos..." />
         <Modal 
           isVisible={this.state.visibleModal}
           onBackdropPress={() => this.setState({ visibleModal: false })}
-          hideModalContentWhileAnimating={true}
           animationIn="slideInDown"
           animationOut="slideOutUp"
           backdropOpacity={0}
-          style={{marginLeft: 0, marginRight: 0, justifyContent: "flex-start", paddingTop: 0}}
+          style={{marginLeft: 0, marginRight: 0, justifyContent: "flex-start", paddingTop: 25}}
         >
           {this._renderModalContent()}
         </Modal>
+        {/* nav bar */}
         <View style={{ flexDirection: "row", justifyContent: "space-between", height: 50, marginLeft: 5, marginRight: 5 }}>
           <TouchableOpacity style={styles.navbarButton} onPress={this._showTips}>
-            <Text style={{ color: "#333333", fontWeight: "bold",}} >Tips</Text>
+            <Text style={{ color: "#333333", fontWeight: "bold",}} >{this.state.visibleModal? 'X' : 'Tips'}</Text>
           </TouchableOpacity>
           <View style={{ flexDirection: "row" }}>
-            <Text style={{ color: "#333333", margin: 15 }}>{this.state.cameraPhotos.length + this.state.selectedPhotos.length}</Text>
-            <TouchableOpacity style={styles.navbarButton} onPress={this.props.validate.bind(this,this.state.cameraPhotos.concat(this.state.selectedPhotos))}>
+            <View style={styles.circle}>
+              <Text style={{ color: "white", }}>{this.state.cameraPhotos.length + this.state.selectedPhotos.length}</Text>
+            </View>
+            <TouchableOpacity style={styles.navbarButton} onPress={this.onPressReview}>
               <Text style={{ color: "#FA770B", fontWeight: "bold" }}>Review</Text>
             </TouchableOpacity>
           </View>
         </View>
+        {/* displays camera or gallery */}
         {this.state.camera ? 
           <CameraExample addPhoto={this.getCameraPhotos}></CameraExample> :
           <CameraRollPicker callback={this.getSelectedImages} selectedMarker={<Image
             style={styles.marker}
             source={require("./assets/selected.png")}
           />}/>}
+        {/* buttons to select camera or gallery */}
         <View style={{ flexDirection: "row", backgroundColor: "white" }}>
           <TouchableOpacity style={this.state.camera ? styles.buttonActive : styles.button} onPress={this.switchToCamera}>
             <Text style={styles.buttonText}>CAMERA</Text>
@@ -89,6 +112,7 @@ export default class Photos extends React.Component {
 const styles = StyleSheet.create({
   navbarButton: {
     margin: 15,
+    marginLeft: 10,
   },
   button: {
     flex: 1,
@@ -128,5 +152,15 @@ const styles = StyleSheet.create({
     width: undefined,
     borderRadius: 6,
     borderColor: "rgba(0, 0, 0, 0.1)",
+  },
+  circle: {
+    height: 25,
+    width: 25,
+    borderRadius: 25,
+    backgroundColor: '#FA770B',
+    zIndex: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center'
   },
 })

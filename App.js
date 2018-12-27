@@ -4,8 +4,8 @@ import Onboarding from './Onboarding';
 import Photos from './Photos';
 import Validation from './Validation';
 
-/* This is a temporary backend endpoint that will simulate a real 
- * request and response 
+/* This is a temporary backend endpoint that will simulate a real
+ * request and response
  */
 const VALIDATION_API_URI = 'http://ec2-54-164-18-2.compute-1.amazonaws.com/verify';
 
@@ -37,14 +37,22 @@ export default class BestFriendsApp extends React.Component {
     AsyncStorage.setItem('alreadyLaunched', 'true');
   }
 
+  back = () => {
+    this.setState({page: "photos"})
+  }
+
   validate = (photos) => {
+    if (photos.length == 0) {
+      // Error banner here
+      return Promise.resolve()
+    }
     // make request
     let formData = new FormData();
     for (let uri of photos) {
       console.log({ uri });
       formData.append(uri, { uri, name: uri, type: 'image/jpeg' });
     }
-    fetch(VALIDATION_API_URI, {
+    return fetch(VALIDATION_API_URI, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -72,7 +80,7 @@ export default class BestFriendsApp extends React.Component {
       if (this.state.page === "photos") {
         return <Photos validate={this.validate}></Photos>;
       } else if (this.state.page === "validate") {
-        return <Validation photos={this.state.photos}></Validation>
+        return <Validation photos={this.state.photos} back={this.back}></Validation>
       }
     }
   }
